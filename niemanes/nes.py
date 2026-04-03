@@ -19,7 +19,6 @@ class NES:
     # load game rom
     def load_rom(self, rom):
         self.rom = rom
-        print(len(rom.prg_rom))
         if rom.mapper != 0:
             raise NotImplementedError("Games that use Mappers are not supported")
         self.memory[0x8000 : 0x10000] = memoryview(rom.prg_rom)
