@@ -4,7 +4,7 @@ Run the NiemaNES emulator
 '''
 
 # imports
-from niemanes import NES
+from niemanes import ROM, NES
 from pathlib import Path
 import argparse
 
@@ -22,5 +22,6 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     nes = NES()
-    nes.load_cartridge(args.input)
-    pass # TODO
+    rom = ROM.load_rom(args.input)
+    nes.load_rom(rom)
+    nes.cpu.interpret()

@@ -21,12 +21,12 @@ def open_file(path, mode='rb'):
 
 # return the n-th bit of a bool (0 = False, 1 = True)
 def get_bit(bit_num, value):
-    return bool((value >> bit_num) & 0x01)
+    return bool((value >> bit_num) & 0b1)
 
 # return the result of resetting the n-th bit of an integer to 0
 def reset_bit(bit_num, value):
-    return uint8(value & ~(0x01 << bit_num))
+    return uint8(value & ~(0b1 << bit_num))
 
 # return the result of setting the n-th bit of an integer to 1
 def set_bit(bit_num, value):
-    return uint8(value | (0x01 << bit_num))
+    return uint8(value | (0b1 << bit_num))

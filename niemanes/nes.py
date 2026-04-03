@@ -4,15 +4,22 @@ Nintendo Entertainment System (NES) Console
 '''
 
 # imports
-from niemanes.cartridge import load_rom
 from niemanes.cpu import CPU
+from niemanes.memory import MainMemory, VRAM
 
 # class to represent NES console
 class NES:
     # initialize NES object
     def __init__(self):
         self.cpu = CPU(nes=self)
+        self.memory = MainMemory()
+        self.vram = VRAM()
+        self.rom = None
 
-    # load game cartridge
-    def load_cartridge(self, path):
-        self.cartridge = load_rom(path)
+    # load game rom
+    def load_rom(self, rom):
+        self.rom = rom
+        print(len(rom.prg_rom))
+        if rom.mapper != 0:
+            raise NotImplementedError("Games that use Mappers are not supported")
+        self.memory[0x8000 : 0x10000] = memoryview(rom.prg_rom)
